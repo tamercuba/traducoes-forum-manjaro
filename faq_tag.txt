@@ -1,0 +1,208 @@
+LISTA COMPLETA DOS FAQs : https://forum.manjaro.org/tags/c/faq/faq -------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+POST-1--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+LINK-DA-POSTAGEM: https://forum.manjaro.org/t/about-the-frequently-asked-questions-category/53935 ------------
+TÍTULO: Sobre a categoria FAQ --------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+[CONFIRA AQUI PRIMEIRO!] Tem uma dúvida? Dê uma olhada no nosso FAQ antes de postar, provavelmente você encontrará uma resposta aqui. 
+
+As postagens do FAQ têm como objetivo respostas esclarecedoras e livres de subjetividade. Se existem duas respostas/soluções possíveis para uma pergunta, então os méritos de cada uma devem ser esclarecidos. 
+
+Note que as perguntas e respostas aqui são estritamente moderadas. Por favor não se sinta ofendido caso uma de suas respostas seja apagada.
+
+--------------------------------------------------------------------------------------------------------------
+POST-2--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+LINK-DA-POSTAGEM: https://forum.manjaro.org/t/how-to-search-the-forum/27039 ----------------------------------
+--------------------------------------------------------------------------------------------------------------
+TÍTULO: Como procurar corretamente no fórum ------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Antes de postar um novo tópico, tente pesquisar no fórum para ver se sua pergunta já foi feita.
+
+Pesquisar é fácil - clique no ícone de lupa no canto superior direito e digite uma ou mais palavras-chave. Segmentos e postagens contendo essa palavra-chave serão mostrados.
+
+Por exemplo, se você estiver postando sobre um Dell XPS 15 9560, tente pesquisar por "Dell 9560" ou "XPS 9560". É muito provável que os problemas que você está tendo já estejam em discussão!
+
+--------------------------------------------------------------------------------------------------------------
+POST-3--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+LINK-DA-POSTAGEM: https://forum.manjaro.org/t/how-to-choose-the-proper-acpi-kernel-argument/80035/2 ----------
+--------------------------------------------------------------------------------------------------------------
+TÍTULO: Como configurar corretamente o parâmetro ACPI --------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+O lançamento da tecnologia Optimus tem criado novos desafios aos usuários Linux. Um dos maiores problemas é inicializar corretamente sua GPU com a inicialização do sistema. Muitas vezes, o conselho dado é adicionar um parâmetro ACPI (sigla em inglês para Interface Avançada de Configuração e Energia) no grub. Porém muitas vezes isso não é apropriado para o hardware ao qual está sendo aplicado. Isso pode causar instabilidades e mal funcionamento de algumas funções do seu laptop. Uma vez que o usuário encontre um parâmetro que funcione corretamente, é importante adiciona-lo corretamente ao seu arquivo de configuração do grub para que ele seja carregado automaticamente na inicialização. Vamos dar uma olhada em como escolher o parâmetro ACPI adequado e, em seguida, como adicioná-lo corretamente ao arquivo de configuração do grub.
+
+Antes de fazer qualquer alteração tenha certeza que você realmente precisa disso.
+
+1) Esta é provavelmente a maneira mais fácil de saber se você realmente precisa alterar o parâmetro ACPI do kernel. Este problema pode ser visto se você está executando o Linux a partir de um pendrive LiveUSB ou se está instalando em um disco rígido local. Se quando você desliga o computador ele trava antes de desligar, e você precisa segurar o botão liga/desliga para conseguir desligá-lo, talvez seja necessário configurar o parâmetro ACPI.
+2) Se você está utilizando um laptop com técnologia Optimus e, após instalar o driver proprietário da NVIDIA seu laptop travou nos seguintes passos:
+	a) Iniciado TLP inicialização/desligamento do sistema
+	b) 
+	c) Recebeu uma mensagem de erro sobre a configuração da "luz de fundo"
+	d) Seu laptop apenas inicializa em uma tela preta e as ventuínhas começama funcionar constantemente
+
+Se você se enquadra em algum dos exemplos acima, talvez seja necessário adicionar o parâmetro do kernel ACPI. 
+
+3) Isso requer um pouco de esforço do usuário, mas não se assuste. Pressione "E" na tela do grub e remova o parâmetro de kernel silencioso antes de inicialiar seu computador. Enquanto seu computador inicializa você verá na sua tela uma lista de  tudo que está sendo carregado. O kernel, antes de começar a inicializar os pacotes, faz uma verificação rápida de hardware e se houver algum problema ao iniciar qualquer dispositivo de hardware ele listará um erro de acpi. Se você ver um erro aqui, então talvez precise de um parâmetro de kernel ACPI.
+
+-Escolhendo um parâmetro de kernel acpi.-
+
+Para lidar com o hardware do seu computador, a BIOS ou UEFI procuram certos "identificadores" com base no seu sistema operacional. Ele faz isso através de "chamadas" de acpi do sistema operacional para a BIOS. Quando você vê problemas como os listados acima, isso significa que o BIOS não entende as chamadas enviadas pelo sistema operacional. O lado bom é que tanto o MS Windows quando o Linux seguem as especificações UEFI e usam as mesmas strings OSI para identificar qual sistema operacional é usado. Ao contrário do kernel do Windows, o kernel do Linux pode determinar quais “chamadas de energia” são enviadas para o BIOS pelo uso dessas strings OSI no parâmetro do kernel acpi, então adicionando esses parâmetros, você pode basicamente dizer ao Linux para "imitar" as chamadas acpi enviadas por outro sistema operacional. Quando você comprou seu laptop, ele provavelmente veio com o Windows pré-instalado. A versão do Windows que foi instalada é sua primeira pista para descobrir qual parâmetro OSI seu parâmetro do kernel do acpi precisa. Do Windows 2000 ao Windows 8.1, você pode usar o nome da versão do Windows para localizar a sequência OSI que deve usar. No entanto, no Windows 10, como ele usa um modelo de “rolling release” (lançamento contínuo), encontrar a String OSI que você precisa usar requer um pouco mais de trabalho. Para encontrar o número da versão da sua instalação do Windows, abra um prompt de comando no Windows e digite winver. Isso dará a sua versão do Windows da seguinte maneira, o Windows 10 versão 1607. Essa é a informação que você precisa para determinar a sequência OSI que seu parâmetro do kernel precisa. Depois de ter sua versão do Windows, use o gráfico abaixo para descobrir como sua versão do Windows precisa ser representada no parâmetro do kernel.
+
+Argumentos OSI para Windows(referencia[1])
+
+OSI String		Target OS
+Windows 2000		Windows 2000
+Windows 2001		Windows XP
+Windows 2001 SP1	Windows XP SP1
+Windows 2001.1		Windows Server 2003
+Windows 2001 SP2	Windows XP SP2
+Windows 2001.1 SP1	Windows Server 2003 SP1
+Windows 2006		Windows Vista
+Windows 2006 SP1	Windows Vista SP1
+Windows 2006.1		Windows Server 2008
+Windows 2009		Windows 7, Win Server 2008 R2
+Windows 2012		Windows 8, Win Server 2012
+Windows 2013		Windows 8.1
+Windows 2015		Windows 10
+Windows 2016		Windows 10, version 1607
+Windows 2017		Windows 10, version 1703
+Windows 2017.2		Windows 10, version 1709
+Windows 2018		Windows 10, version 1803
+Windows 2018.2		Windows 10, version 1809
+
+Depois de ter sua string OSI, você agora tem todas as informações necessárias para o parâmetro do kernel.
+
+Para que o Linux imite sua versão do Windows, você precisa adicionar o seguinte parâmetro do kernel, acpi_osi = 'OSI String' (referência[2])
+
+Exemplos:
+
+Windows 7 - acpi_osi = 'Windows 2009'
+
+Windows 10 ver. 1709 - acpi_osi = 'Windows 2017'
+
+Você notará que a versão 1709 do Windows 10 tem uma sequência OSI do Windows 2017.2 e usei o Windows 2017. Nos meus testes, descobri que o Windows 2017.2 não era reconhecido como um argumento válido.
+
+Nota sobre acpi_osi =!
+
+Esse argumento desabilita todas as cadeias de caracteres de fornecedores que talvez estejam presentes. Ele só deve ser usado se uma das strings OSI acima não funcionar sozinha. Se você usá-lo quando não for necessário, talvez você possa inicializar sem nenhum erro de acpi, mas seu touchpad ou wifi não funcionará. Ele também deve ser usado em combinação com uma das strings OSI acima.
+
+Exemplo:
+
+acpi_osi =! acpi_osi = 'Windows 2012'
+
+Isso desabilitará todas as cadeias de caracteres do fornecedor e, então, instruirá o kernel a “imitar” o Windows 8 quando ele se comunicar com o BIOS.
+
+Nota para laptops Dell:
+
+Às vezes, os parâmetros do kernel acima não funcionarão corretamente em alguns laptops da Dell. Se este for o caso, você pode tentar o seguinte: acpi_rev_override = # 
+Substitua o “#” por um número entre 1 e 5. Para que este parâmetro do kernel seja aplicado corretamente talvez seja necessário desligar completamente (e não apenas reiniciar) duas vezes.
+
+Adicionando o parâmetro ACPI ao grub
+
+Depois de ter encontrado o argumento do kernel que funciona melhor para o seu hardware, você precisa adicioná-lo ao grub para que ele seja aplicado toda vez que você inicializar o sistema. Isto é mais facil do que parece. O problema que a maioria dos usuários tem é a sintaxe ou como digitá-la na linha apropriada. A chave para ter o argumento reconhecido é usar apenas 'aspas simples'.
+
+Para adicionar o argumento ao grub, abra um terminal e digite o seguinte:
+
+	1) sudo nano / etc / default / grub
+
+	2) Adicione o argumento do kernel à seguinte linha: GRUB_CMDLINE_LINUX_DEFAULT.
+
+Exemplo: 
+
+GRUB_CMDLINE_LINUX_DEFAULT="acpi_osi='Windows 2018' rd.udev.log-priority=3 bootsplash.bootfile=bootsplash-themes/manjaro/bootsplash nvme_core.default_ps_max_latency_us=5500"
+
+	3) Pressione ctrl + x para sair e "Y" para salvar
+
+	4) sudo update-grub
+
+Agora seu argumento do kernel foi adicionado ao grub e será carregado toda vez que você inicializar seu laptop.
+
+Isso não é de forma alguma um guia completo no uso dos parâmetros do kernel do ACPI. Isso exigiria um documento muito mais longo. Em vez disso, ele fornece algumas instruções básicas que podem ser seguidas para colocar o sistema em funcionamento. Se você ainda está tendo problemas de ACPI e precisa de ajuda para resolvê-lo, há algumas opções disponíveis para você. Primeiramente, pesquise no fórum para ver se seu problema foi resolvido antes. Se isso não resolver o problema, crie um novo tópico de suporte no fórum para discutir seu problema.
+
+
+Referências: 
+[1] https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi  
+[2] https://www.kernel.org/doc/Documentation/admin-guide/kernel-parameters.txt
+
+--------------------------------------------------------------------------------------------------------------
+POST-4--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+LINK-DA-POSTAGEM: https://forum.manjaro.org/t/options-for-nvidia-optimus-graphics/75185/2 --------------------
+--------------------------------------------------------------------------------------------------------------
+TÍTULO: Opções para GPU Nvidia Optimus -----------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Existem diversas opções para gráficos hibridos da Nvidia, cada uma com seus pros e contras.
+
+Essas opções são:
+- Bumblebee
+- Nvidia-prime
+- Optimus-manager
+- Nvidia-xrun
+- nouveau-driver
+- optimus-switch
+
+Bumblebee:
+- Performance não tão boa
+( de acordo com a Arch Wiki: "Bumblebee não apenas não tem uma performance boa [1][2] como não tem planos para suporte do Vulkan [3]" )
+- Pré-configurado, capacidade de usar gpu nvidia “ondemand” com o comando primusrun
+- O projeto parece estar morto [4]
+
+nvidia-prime:
+- Utilizada pelo Ubuntu
+- Performance melhor
+- Para alternar entre a GPU da Nvidia e a integrada da Intel é necessário refazer login
+
+[LINK PARA TUTORIAL - How to Set up PRIME with NVIDIA proprietary driver][5]
+(há também um PKGBUILD no tópico em algum lugar que pode ajudar na configuração, mas também envolve a escolha do pacote correto).
+Para mais informações acesse a Arch Wiki: [6]
+
+optimus-manager
+- Muito parecido com o anterior 
+
+Para mais informações veja:
+[LINK PARA TUTORIAL - Optimus Manager][7]
+
+nvidia-xrun
+- PKGBUILD in AUR
+
+Veja também: [8]
+Link para o github do projeto: [9] 
+
+Optimus-switch
+- Fácil de configurar um modo apenas para Intel Graphics ou o modo PRIME para intel/NVIDIA
+- Funciona exatamente como o PRIME [5] quando no modo principal
+- O modo "Intel-only" desabilita a GPU Nvidia na inicialização
+- Não utiliza bbswitch ou nouveau para troca
+- sudo set-intel.sh configura o modo "intel-only"
+- sudo set-nvidia.sh configura o modo principal intel/nvidia
+- Instaladores separados para LightDM[10], SDDM[11] e GDM[11]
+- Por mais que esteja funcionando muito bem, é um projeto ainda muito novo
+
+Referências:
+[1]  https://github.com/Witko/nvidia-xrun/issues/4#issuecomment-153386837
+[2]  https://bbs.archlinux.org/viewtopic.php?pid=1822926
+[3]  https://bbs.archlinux.org/viewtopic.php?pid=1822926
+[4]  https://wiki.archlinux.org/index.php/bumblebee
+[5]  https://forum.manjaro.org/t/howto-set-up-prime-with-nvidia-proprietary-driver/40225
+[6]  https://wiki.archlinux.org/index.php/PRIME
+[7]  https://forum.manjaro.org/t/optimus-manager/67893
+[8]  https://wiki.archlinux.org/index.php/Nvidia-xrun
+[9]  https://github.com/Witko/nvidia-xrun
+[10] https://github.com/dglt1/optimus-switch
+[11] https://github.com/dglt1/optimus-switch-sddm
+[12] https://github.com/dglt1/optimus-switch-gdm
+
+--------------------------------------------------------------------------------------------------------------
+POST-5--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+LINK-DA-POSTAGEM: https://forum.manjaro.org/t/how-do-i-do-a-system-upgrade-within-a-tty/77286 ----------------
+--------------------------------------------------------------------------------------------------------------
+TÍTULO: Como eu atualizo o sistema 
+--------------------------------------------------------------------------------------------------------------
+

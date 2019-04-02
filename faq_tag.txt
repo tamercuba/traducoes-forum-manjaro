@@ -203,6 +203,74 @@ POST-5--------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
 LINK-DA-POSTAGEM: https://forum.manjaro.org/t/how-do-i-do-a-system-upgrade-within-a-tty/77286 ----------------
 --------------------------------------------------------------------------------------------------------------
-TÍTULO: Como eu atualizo o sistema 
+TÍTULO: Como atualizar o sistema a partir de um TTY ----------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
 
+Pode acontecer que os desenvolvedores do Manjaro recomendem, devido a circunstâncias específicas, atualizar seu sistema de dentro de um TTY. Este guia visa ajudá-lo a ter êxito nessa tarefa da maneira mais fácil possível. Há fotos para que você possa se guiar antes de fazer isso sozinho. 
+
+Mas que diabos quer dizer "atualziar o sistema a partir de um TTY" ?
+
+Isso significa atualizar seu sistema de fora do seu ambiente gráfico, ou seja diretamente da linha de comando pura.
+
+Ok, mas como eu faço isso ?
+
+De maneira rápida:
+
+	- CTRL+ALT+F4
+	- Login
+	- 'sudo pacman -Syu'
+	- systemctl reboot
+
+Fácil não ? Vamos explicar exatamente o que cada passo realmente faz:
+
+A primeira coisa que queremos é acessar a linha de comando pura. O atalho para isso pode variar dependendo da sua DE (mas sempre seguindo o padrão CTRL+ALT+F'n' ).
+Se você executar esse comando corretamente deverá ver uma tela parecida com essa:
+
+[IMAGEM](https://forum.manjaro.org/uploads/default/original/3X/c/d/cd6306c4f8f4106d2351907352a74d5eae46fa43.png)
+
+Faça login normalmente e você verá um prompt mais ou menos como esse:
+
+[IMAGEM](https://forum.manjaro.org/uploads/default/original/3X/f/f/ff2edbc8da1d35a346dd7149ad75444ff9dccbc6.png)
+
+Agora basta atualizarmos os sistema utilizando o comando 'sudo pacman -Syu' e você verá algo parecido com isso:
+
+[IMAGEM](https://forum.manjaro.org/uploads/default/original/3X/6/f/6fca354db7c7e33148a100b09d9316564c88224d.png)
+
+Após concluir a instalação use o comando 'systemctl reboot' para reiniciar o seu computador. 
+
+Mas por que atualizar o sistema assim ?
+
+Essa recomendação é emitida quando existe o risco de a sessão gráfica travar durante a atualização. Se isso acontecer enquanto você estiver usando um gerenciador de pacotes gráfico ou um gerenciador de pacotes CLI que tenha sido executado em um emulador de terminal, isso significa que o gerenciador de pacotes também falhará, parando assim a atualização abruptamente. Um gerenciador de pacotes que para de funcionar no meio de uma atualização do sistema pode te trazer diversas complicações, e seu sistema provavelmente precisará ser reparado se isso acontecer com você.
+	- Você estará em uma situação de atualização parcial[1]. Na melhor das hipóteses, alguns softwares sem importância param para funcionar até que seu sistema seja reparado adequadamente; na pior das hipóteses, isso tornará seu sistema completamente não inicializável.
+	- Pode corromper seu banco de dados local que armazena todas as informações sobre os pacotes instalados no seu sistema, que vai acarretar em problemas futuros com o gerenciamento de pacotes (Erro: não foi possível abrir o arquivo /var/lib/pacman/local/[…]/desc: Nenhum arquivo ou diretório)
+
+Caso você queira ainda mais...
+...Você pode querer alterar seu runlevel para reduzir ainda mais o risco alternando para um nível de execução mais mínimo que não inicia nenhuma sessão gráfica. Para fazer isso, altere seu nível de execução atual com o comando systemctl isolate multi-user.target. Uma vez feito isso, você pode fazer o login e fazer a atualização do seu sistema. Para mais informações, consulte o seguinte artigo: https://wiki.archlinux.org/index.php/Systemd#Targets
+Note que alterar seu runlevel temperariamente é geralmente um exagero: apenas mudar para uma interface de linha de comando pura deve ser mais que suficiente.
+
+
+Referências:
+[1] https://wiki.archlinux.org/index.php/System_maintenance#Partial_upgrades_are_unsupported
+
+--------------------------------------------------------------------------------------------------------------
+POST-6--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+LINK-DA-POSTAGEM: https://forum.manjaro.org/t/which-manjaro-version-should-i-use/58773 -----------------------
+--------------------------------------------------------------------------------------------------------------
+TÍTULO: Qual versão do Manjaro eu devo usar? -----------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Essa é uma questão altamente subjetiva, você é o único que pode te dar a resposta mais adequada.
+
+Por que?
+Por que GNU/Linux é o que é! Toda distribuição é mais ou menos baseada na mesma base, o kernel Linux[1] e os softwares GNU[2].
+A "verdadeira" escolha está no chamado "desktop environment".
+
+Quais escolhas eu tenho?
+
+O que realmente diferencia a escolha do seu ambiente gráfico é como ele é montado. Pessoas diferentes tem gostos diferentes, fluxos de trabalho diferentes, hardware diferentes, requisitos diferentes e etc.
+
+
+Referências:
+[1] https://www.kernel.org/
+[2] https://www.gnu.org/

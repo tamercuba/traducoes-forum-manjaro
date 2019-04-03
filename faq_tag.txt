@@ -270,7 +270,65 @@ Quais escolhas eu tenho?
 
 O que realmente diferencia a escolha do seu ambiente gráfico é como ele é montado. Pessoas diferentes tem gostos diferentes, fluxos de trabalho diferentes, hardware diferentes, requisitos diferentes e etc.
 
+Como decidir então ?
+
+A primeira coisa a fazer é testar o Manjaro com diferentes desktop environments a partir de de uma live-session utilizando um DVD/USB.
+Outra alternativa é fazer a instalação do Manjaro em uma VirtualBox. Essa é uma maneira segura de instalar o sistema operacional com diferentes desktop environments sem precisar formatar o seu HD. O único requisito para criar uma maquina virtual é ter espaço o suficiente no seu HD.
+
+Para instalar o Manjaro em uma maquina virtual você precisará de:
+	- dois núcleos em seu CPU
+	- pelo menos 2GiB de RAM
+	- 16 GiB de espaço disponível em seu HD
+
+Edições oficiais do Manjaro [LINK](https://osdn.net/projects/manjaro/storage/)
+Edições da comunidade [LINK](https://osdn.net/projects/manjaro-community/storage/)
+
+Algumas dicas:
+	- Comece com o XFCE. Depois teste KDE ou Mate.
+* Se você gosta muito do Windows:
+	- Teste XFCE, KDE, Mate, LXDE ou LXQt.
+* Se você gosta de mobile:
+	- Teste o Gnome ou KDE.
+* Se você gosta de integração com coisas online:
+	- Teste o Gnome, talvez o KDE.
+* Se você tem facilidade com o uso do teclado e atalhos:
+	- Teste Gnome, Awesome, i3, Openbox ou bspwm.
+* Se você está disposto a ter uma experiência realmente diferente:
+	- Teste Awesome, i3, Openbox ou bspwm.
+* Se você tem um computador muito antigo:
+Infelizmente o Manjaro não tem uma versão oficial para processadores com arquitetura 32-bits. Você tem a alternativa de usar Manjaro 32[3], que é uma versão do Manjaro desenvolvida e com suporte feito pela comunidade.
+	- Teste o LXDE, LXQt, i3, Awesome ou bspwm.
+Felizmente, se sua maquina roda Windows, muito provavelmente ela roda a maioria dos desktop environments Linux com exceção, talvez, do Gnome e seus derivados (Budgio, Cinnamon, Deepin).
+* Se você quer uma experiência realmente atraente:
+	- Teste o Gnome, KDE, Deepin, Cinnamon ou Budgie.
+* Se você quer algo para uso profissional:
+	- Teste o XFCE, KDE, Mate ou Gnome.
+
 
 Referências:
 [1] https://www.kernel.org/
 [2] https://www.gnu.org/
+[3] https://manjaro32.org/
+
+--------------------------------------------------------------------------------------------------------------
+POST-7--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+LINK-DA-POSTAGEM: https://forum.manjaro.org/t/package-installation-says-filename-exists-in-filesystem-failed-to-commit-transaction-conflicting-files/4382  ----------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+TÍTULO: Erro na instalação do pacote: 'FILENAME' existe no sistema de arquivos; "Falha ao confirmar transações conflitantes" -------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+Não consigo instalar ou atualizar um pacote pois estou tendo um dos seguintes erros:
+
+erro: não foi possível preparar a transação
+erro: falha ao confirmar a transação (arquivos conflitantes)
+libname: /insert/file/name/here ja existe no sistema de arquivos
+Erros ocorreram, nenhum pacote foi atualizado.
+
+Por que isso está acontecendo ?
+.
+.
+.
+.
+.
+
